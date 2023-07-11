@@ -1,0 +1,29 @@
+[tool.setuptools]
+py-modules = []
+
+[project]
+name = "mittaridatapumppu-persister"
+description = ""
+readme = "README.md"
+requires-python = ">=3.10"
+dynamic = ["version"]
+
+dependencies = [
+  "aiokafka",
+  "fvhiot@https://github.com/ForumViriumHelsinki/FVHIoT-python/archive/refs/tags/v0.3.1.zip",
+  "influxdb-client",
+  "kafka-python",
+  "sentry-asgi",
+]
+
+[project.optional-dependencies]
+dev = [
+  "autoflake",
+  "black",
+  "pep8-naming",
+  "pre-commit",
+  "pytest",
+  "pytest-asyncio",
+  "pytest-cov",
+  "ruff",
+]
