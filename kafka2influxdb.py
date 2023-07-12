@@ -45,6 +45,7 @@ parsed_data = {
 ],
     "device": {
         "device_id": "B81758FFFE031234",
+        # FIXME: this is incorrect format for device_metadata now
         "device_metadata": {"name": "Elsys ERS CO2 A81758FFFE035729", "parser_module": "fvhiot.parsers.elsys"},
         "device_state": {"state data": "is here"},
     },
@@ -126,11 +127,13 @@ def main():
         logging.info("Preparing to save data")
         data = data_unpack(msg.value)
         logging.debug(pformat(data, width=120))
-        measurement_name = data["device"]["device_metadata"]["parser_module"].split(".")[-1]
+        measurement_name = data["device"]["parser_module"].split(".")[-1]
         device_id = data["device"]["device_id"]
         influxdb_datapoints = parsed_data_to_influxdb_format(measurement_name, device_id, data)
         with client.write_api(write_options=SYNCHRONOUS) as write_api:
             write_api.write(bucket, org, influxdb_datapoints)
+            logging.info(f"Saved {len(influxdb_datapoints)} datapoints to InfluxDB")
+            logging.debug(pformat(influxdb_datapoints, width=120))
 
 
 if __name__ == "__main__":
