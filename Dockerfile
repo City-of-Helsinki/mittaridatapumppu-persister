@@ -1,21 +1,21 @@
-# Use the BusyBox base image
-FROM busybox
+FROM python:3.11-alpine
 
-# Create a directory for serving the HTML file
-RUN mkdir -p /www
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
 
-# Copy the index.html file to the /www directory in the container
-COPY index.html /www/index.html
+RUN addgroup -S app && adduser -S app -G app
+WORKDIR /home/app
 
-# Create an unprivileged user
-RUN adduser -D -H -s /bin/sh httpuser
+# Copy and install requirements only first to cache the dependency layer
+COPY --chown=app:app requirements.txt .
+RUN pip install --no-cache-dir --no-compile --upgrade -r requirements.txt
 
-# Change ownership of the /www directory to the unprivileged user
-RUN chown -R httpuser /www
+COPY --chown=app:app . .
 
-# Expose port 8080 for the HTTP server to listen on
-EXPOSE 8080
+# Support Arbitrary User IDs
+RUN chgrp -R 0 /home/app && \
+  chmod -R g+rwX /home/app
 
-# Switch to the unprivileged user and start the BusyBox HTTP server
-USER httpuser
-CMD httpd -f -p 8080 -h /www
+USER app
+
+CMD ["python", "./kafka2influxdb.py"]
