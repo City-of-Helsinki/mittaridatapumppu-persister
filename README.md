@@ -1,1 +1,1 @@
-# Minimal service
+# Mittaridatapumppu persister
