@@ -1,3 +1,5 @@
+# mittaridatapumppu-persister
+
 FROM python:3.11-alpine
 
 ENV PYTHONDONTWRITEBYTECODE 1
