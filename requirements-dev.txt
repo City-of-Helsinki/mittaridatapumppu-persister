@@ -5,7 +5,9 @@
 #    pip-compile --extra=dev --output-file=requirements-dev.txt
 #
 aiokafka==0.8.1
-    # via mittaridatapumppu-persister (pyproject.toml)
+    # via
+    #   fvhiot
+    #   mittaridatapumppu-persister (pyproject.toml)
 async-timeout==4.0.3
     # via aiokafka
 autoflake==2.2.1
@@ -31,7 +33,7 @@ filelock==3.13.1
     # via virtualenv
 flake8==6.1.0
     # via pep8-naming
-fvhiot @ https://github.com/ForumViriumHelsinki/FVHIoT-python/archive/refs/tags/v0.4.0.zip
+fvhiot[kafka] @ https://github.com/ForumViriumHelsinki/FVHIoT-python/archive/refs/tags/v0.4.0.zip
     # via mittaridatapumppu-persister (pyproject.toml)
 identify==2.5.31
     # via pre-commit
@@ -45,6 +47,8 @@ kafka-python==2.0.2
     #   mittaridatapumppu-persister (pyproject.toml)
 mccabe==0.7.0
     # via flake8
+msgpack==1.0.7
+    # via fvhiot
 mypy-extensions==1.0.0
     # via black
 nodeenv==1.8.0

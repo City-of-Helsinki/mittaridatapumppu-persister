@@ -5,7 +5,9 @@
 #    pip-compile
 #
 aiokafka==0.8.1
-    # via mittaridatapumppu-persister (pyproject.toml)
+    # via
+    #   fvhiot
+    #   mittaridatapumppu-persister (pyproject.toml)
 async-timeout==4.0.3
     # via aiokafka
 certifi==2023.7.22
@@ -13,7 +15,7 @@ certifi==2023.7.22
     #   fvhiot
     #   influxdb-client
     #   sentry-sdk
-fvhiot @ https://github.com/ForumViriumHelsinki/FVHIoT-python/archive/refs/tags/v0.4.0.zip
+fvhiot[kafka] @ https://github.com/ForumViriumHelsinki/FVHIoT-python/archive/refs/tags/v0.4.0.zip
     # via mittaridatapumppu-persister (pyproject.toml)
 influxdb-client==1.38.0
     # via mittaridatapumppu-persister (pyproject.toml)
@@ -21,6 +23,8 @@ kafka-python==2.0.2
     # via
     #   aiokafka
     #   mittaridatapumppu-persister (pyproject.toml)
+msgpack==1.0.7
+    # via fvhiot
 packaging==23.2
     # via aiokafka
 python-dateutil==2.8.2
