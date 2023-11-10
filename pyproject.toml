@@ -14,7 +14,7 @@ dynamic = ["version"]
 
 dependencies = [
   "aiokafka",
-  "fvhiot@https://github.com/ForumViriumHelsinki/FVHIoT-python/archive/refs/tags/v0.3.1.zip",
+  "fvhiot@https://github.com/ForumViriumHelsinki/FVHIoT-python/archive/refs/tags/v0.4.0.zip",
   "influxdb-client",
   "kafka-python",
   "sentry-asgi",
