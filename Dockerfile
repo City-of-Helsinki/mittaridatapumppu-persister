@@ -8,6 +8,13 @@ ENV PYTHONUNBUFFERED 1
 RUN addgroup -S app && adduser -S app -G app
 WORKDIR /home/app
 
+# Install requirements to build aiokafka
+RUN apk add --no-cache \
+  gcc \
+  python3-dev \
+  libc-dev \
+  zlib-dev
+
 # Copy and install requirements only first to cache the dependency layer
 COPY --chown=app:app requirements.txt .
 RUN pip install --no-cache-dir --no-compile --upgrade -r requirements.txt
