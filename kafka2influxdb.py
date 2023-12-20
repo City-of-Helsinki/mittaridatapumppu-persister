@@ -80,8 +80,11 @@ influxdb_points = [
 
 
 def parsed_data_to_influxdb_format(
-    measurement_name, device_id, data: dict, extra_fields: dict = None,
-    extra_tags: dict = None
+    measurement_name,
+    device_id,
+    data: dict,
+    extra_fields: dict = None,
+    extra_tags: dict = None,
 ) -> list:
     """
     Convert parsed data to InfluxDB datapoints format, see example above.
@@ -134,8 +137,9 @@ def main():
         logging.debug(pformat(data, width=120))
         measurement_name = data["device"]["parser_module"].split(".")[-1]
         device_id = data["device"]["device_id"]
-        influxdb_datapoints = parsed_data_to_influxdb_format(measurement_name,
-                                                             device_id, data)
+        influxdb_datapoints = parsed_data_to_influxdb_format(
+            measurement_name, device_id, data
+        )
         with client.write_api(write_options=SYNCHRONOUS) as write_api:
             write_api.write(bucket, org, influxdb_datapoints)
             logging.info(f"Saved {len(influxdb_datapoints)} datapoints to InfluxDB")

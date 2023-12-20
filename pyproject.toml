@@ -1,5 +1,6 @@
-[tool.setuptools]
-py-modules = []
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
 
 [tool.ruff]
 line-length = 120
@@ -10,13 +11,10 @@ name = "mittaridatapumppu-persister"
 description = ""
 readme = "README.md"
 requires-python = ">=3.10"
-dynamic = ["version"]
-
+version = "v0.1.0"
 dependencies = [
-  "aiokafka",
-  "fvhiot[kafka]@https://github.com/ForumViriumHelsinki/FVHIoT-python/archive/refs/tags/v0.4.0.zip",
+  "fvhiot[kafka]@https://github.com/ForumViriumHelsinki/FVHIoT-python/archive/refs/tags/v0.4.1.zip",
   "influxdb-client",
-  "kafka-python",
   "sentry-asgi",
 ]
 
@@ -30,4 +28,8 @@ dev = [
   "pytest-asyncio",
   "pytest-cov",
   "ruff",
+]
+test = [
+    "pytest",
+    "requests"
 ]
